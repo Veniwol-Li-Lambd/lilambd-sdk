@@ -1,0 +1,10 @@
+node_modules/
+dist/
+__pycache__/
+*.egg-info/
+.venv/
+build/
+*.tgz
+*.tar.gz
+*.pyc
+公開の手順_陛下.md

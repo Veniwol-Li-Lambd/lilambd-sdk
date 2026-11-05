@@ -1,0 +1,4871 @@
+{
+ "service": "Lilambd Data for Agents",
+ "base_url": "https://api.lilambd.com",
+ "mcp_url": "https://api.lilambd.com/mcp",
+ "payment": {
+  "protocol": "x402",
+  "version": 2,
+  "network": "eip155:8453",
+  "asset": "USDC",
+  "asset_address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+  "default_price_atomic": "5000",
+  "headers": [
+   "PAYMENT-SIGNATURE",
+   "X-PAYMENT"
+  ],
+  "challenge_header": "PAYMENT-REQUIRED"
+ },
+ "free_sample": "add sample=1 (max 3 rows)",
+ "catalog_as_of": "2026-11-03",
+ "products": [
+  {
+   "id": "agents",
+   "title": "AI Agent Economy Census",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/counters",
+     "summary": "Ecosystem counters",
+     "operationId": "counters",
+     "params": [
+      {
+       "name": "key",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "e.g. npm keywords:mcp",
+       "example": ""
+      },
+      {
+       "name": "days",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Days back",
+       "example": 30
+      }
+     ]
+    },
+    {
+     "path": "/mcp",
+     "summary": "Search MCP servers",
+     "operationId": "mcpSearch",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Text in name, title or description",
+       "example": "github"
+      },
+      {
+       "name": "remote",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "true = only servers with a remote URL",
+       "example": "true"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/mcp/daily",
+     "summary": "MCP servers per day",
+     "operationId": "mcpDaily",
+     "params": [
+      {
+       "name": "days",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "How many days back (max 400)",
+       "example": 30
+      }
+     ]
+    },
+    {
+     "path": "/mcp/namespaces",
+     "summary": "MCP namespaces",
+     "operationId": "mcpNamespaces",
+     "params": [
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/mcp/new",
+     "summary": "Newly published MCP servers",
+     "operationId": "mcpNew",
+     "params": [
+      {
+       "name": "since",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "YYYY-MM-DD",
+       "example": "2026-11-03"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/mcp/{name}",
+     "summary": "Get an MCP server",
+     "operationId": "mcpServer",
+     "params": [
+      {
+       "name": "name",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": "io.github.microsoft/awesome-copilot"
+      }
+     ]
+    },
+    {
+     "path": "/summary",
+     "summary": "Today's census",
+     "operationId": "summary",
+     "params": [
+      {
+       "name": "include_testnet",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "true to include testnets",
+       "example": "false"
+      }
+     ]
+    },
+    {
+     "path": "/trending/{kind}",
+     "summary": "Trending lists",
+     "operationId": "trending",
+     "params": [
+      {
+       "name": "kind",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": "models"
+      },
+      {
+       "name": "day",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "YYYY-MM-DD, default latest",
+       "example": ""
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/x402",
+     "summary": "Search paid endpoints",
+     "operationId": "x402Search",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Text in description or URL",
+       "example": "weather"
+      },
+      {
+       "name": "category",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Category (see /x402/categories)",
+       "example": "security"
+      },
+      {
+       "name": "host",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Exact host",
+       "example": ""
+      },
+      {
+       "name": "min_price",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Minimum USD per call",
+       "example": null
+      },
+      {
+       "name": "max_price",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Maximum USD per call",
+       "example": null
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "newest | price | cheapest",
+       "example": "price"
+      },
+      {
+       "name": "include_testnet",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "true to include testnets",
+       "example": "false"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/x402/categories",
+     "summary": "Prices by category",
+     "operationId": "x402Categories",
+     "params": []
+    },
+    {
+     "path": "/x402/daily",
+     "summary": "Daily new endpoints",
+     "operationId": "x402Daily",
+     "params": []
+    },
+    {
+     "path": "/x402/hosts",
+     "summary": "Hosts",
+     "operationId": "x402Hosts",
+     "params": [
+      {
+       "name": "category",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Category",
+       "example": ""
+      },
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Host text",
+       "example": ""
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "endpoints | price",
+       "example": "endpoints"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/x402/new",
+     "summary": "New endpoints",
+     "operationId": "x402New",
+     "params": [
+      {
+       "name": "since",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "YYYY-MM-DD, default yesterday",
+       "example": "2026-11-03"
+      },
+      {
+       "name": "category",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Category",
+       "example": ""
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/x402/price-check",
+     "summary": "Check a price",
+     "operationId": "x402PriceCheck",
+     "params": [
+      {
+       "name": "price",
+       "in": "query",
+       "required": true,
+       "type": "number",
+       "description": "USD per call",
+       "example": 0.05
+      },
+      {
+       "name": "category",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Category, empty = all",
+       "example": "security"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "airports",
+   "title": "Airports of the World",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/nearby",
+     "summary": "Nearby airports",
+     "operationId": "nearby",
+     "params": [
+      {
+       "name": "lat",
+       "in": "query",
+       "required": true,
+       "type": "number",
+       "description": "Latitude",
+       "example": 35.68
+      },
+      {
+       "name": "lon",
+       "in": "query",
+       "required": true,
+       "type": "number",
+       "description": "Longitude",
+       "example": 139.76
+      },
+      {
+       "name": "type",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "large_airport | medium_airport | small_airport | heliport",
+       "example": "large_airport"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "How many (max 50)",
+       "example": 5
+      }
+     ]
+    },
+    {
+     "path": "/search",
+     "summary": "Search airports",
+     "operationId": "searchAirports",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Name or city",
+       "example": "Osaka"
+      },
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2",
+       "example": "JP"
+      },
+      {
+       "name": "type",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Airport type",
+       "example": "large_airport"
+      },
+      {
+       "name": "scheduled",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "true | false",
+       "example": "true"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/{code}",
+     "summary": "Get an airport",
+     "operationId": "airport",
+     "params": [
+      {
+       "name": "code",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "colors",
+   "title": "Color Names: 30,000+ Named Colors",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/nearest",
+     "summary": "Nearest color name",
+     "operationId": "nearest",
+     "params": [
+      {
+       "name": "hex",
+       "in": "query",
+       "required": true,
+       "type": "string",
+       "description": "Hex color without #",
+       "example": "ff8800"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "How many (max 50)",
+       "example": 5
+      }
+     ]
+    },
+    {
+     "path": "/random",
+     "summary": "Random palette",
+     "operationId": "random",
+     "params": [
+      {
+       "name": "count",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "How many (max 50)",
+       "example": 5
+      }
+     ]
+    },
+    {
+     "path": "/search",
+     "summary": "Search names",
+     "operationId": "searchColors",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Word",
+       "example": "ocean"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/{name_or_hex}",
+     "summary": "Get a color",
+     "operationId": "color",
+     "params": [
+      {
+       "name": "name_or_hex",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "conflict",
+   "title": "Armed Conflict Events by Country and Region",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/countries/{iso2}",
+     "summary": "Country history",
+     "operationId": "country",
+     "params": [
+      {
+       "name": "iso2",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      },
+      {
+       "name": "from",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "First year",
+       "example": 2015
+      },
+      {
+       "name": "to",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Last year",
+       "example": 2025
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/regions",
+     "summary": "Regions",
+     "operationId": "regions",
+     "params": [
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2",
+       "example": "UA"
+      },
+      {
+       "name": "year",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Year",
+       "example": 2024
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/top",
+     "summary": "Top list",
+     "operationId": "top",
+     "params": [
+      {
+       "name": "year",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Year (default latest)",
+       "example": 2024
+      },
+      {
+       "name": "level",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "country | region",
+       "example": "country"
+      },
+      {
+       "name": "by",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "deaths | civilians | events",
+       "example": "deaths"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "exchanges",
+   "title": "Stock Exchanges and Trading Venues (MIC)",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/search",
+     "summary": "Search venues",
+     "operationId": "searchVenues",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Name, acronym or city",
+       "example": "Tokyo"
+      },
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2",
+       "example": "JP"
+      },
+      {
+       "name": "status",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "active | expired",
+       "example": "active"
+      },
+      {
+       "name": "category",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Market category code",
+       "example": "RMKT"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/{mic}",
+     "summary": "Get a venue",
+     "operationId": "venue",
+     "params": [
+      {
+       "name": "mic",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "exposure",
+   "title": "Exposure brief: one finished security answer per company domain or tech stack",
+   "price_atomic": "500000",
+   "price_usd": 0.5,
+   "free_routes": [],
+   "has_local_spec": false,
+   "routes": [
+    {
+     "path": "/brief",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    }
+   ]
+  },
+  {
+   "id": "hazard",
+   "title": "World Natural Hazards and Warming",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/countries",
+     "summary": "Rank countries",
+     "operationId": "countries",
+     "params": [
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "m7 | m6 | m6_density | warming | deaths | deaths_per_million | pop_share_seismic | anomaly",
+       "example": "m7"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/countries/{iso2}",
+     "summary": "Country profile",
+     "operationId": "country",
+     "params": [
+      {
+       "name": "iso2",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2 or alpha-3",
+       "example": "JP"
+      }
+     ]
+    },
+    {
+     "path": "/events",
+     "summary": "Search disasters",
+     "operationId": "events",
+     "params": [
+      {
+       "name": "kind",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "sig_earthquake | tsunami | volcano",
+       "example": "tsunami"
+      },
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2",
+       "example": "JP"
+      },
+      {
+       "name": "region",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-2 or a1 id",
+       "example": ""
+      },
+      {
+       "name": "from",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "First year",
+       "example": 1900
+      },
+      {
+       "name": "to",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Last year",
+       "example": 2026
+      },
+      {
+       "name": "min_deaths",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Minimum deaths",
+       "example": 100
+      },
+      {
+       "name": "min_magnitude",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Minimum magnitude",
+       "example": null
+      },
+      {
+       "name": "lat",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Latitude",
+       "example": null
+      },
+      {
+       "name": "lon",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Longitude",
+       "example": null
+      },
+      {
+       "name": "radius_km",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Radius (default 300)",
+       "example": 300
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "newest | oldest | deaths | magnitude (nearest when lat/lon)",
+       "example": "deaths"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/events/{id}",
+     "summary": "Get an event",
+     "operationId": "event",
+     "params": [
+      {
+       "name": "id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": "3227"
+      },
+      {
+       "name": "kind",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "sig_earthquake | tsunami | volcano",
+       "example": "sig_earthquake"
+      }
+     ]
+    },
+    {
+     "path": "/features/{id}",
+     "summary": "Indicators",
+     "operationId": "features",
+     "params": [
+      {
+       "name": "id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": "JPN"
+      }
+     ]
+    },
+    {
+     "path": "/gaps",
+     "summary": "Gaps",
+     "operationId": "gaps",
+     "params": [
+      {
+       "name": "level",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "region | country",
+       "example": "region"
+      },
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2",
+       "example": ""
+      },
+      {
+       "name": "min_population",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Minimum population",
+       "example": 1000000
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/joint-exposure",
+     "summary": "Joint exposure",
+     "operationId": "jointExposure",
+     "params": [
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/place-risk",
+     "summary": "Risk for a point (finished answer)",
+     "operationId": "placeRisk",
+     "params": [
+      {
+       "name": "lat",
+       "in": "query",
+       "required": true,
+       "type": "number",
+       "description": "Latitude",
+       "example": 35.68
+      },
+      {
+       "name": "lon",
+       "in": "query",
+       "required": true,
+       "type": "number",
+       "description": "Longitude",
+       "example": 139.69
+      },
+      {
+       "name": "radius_km",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Radius for stations and events (10-1000, default 300)",
+       "example": 300
+      }
+     ]
+    },
+    {
+     "path": "/regions",
+     "summary": "Search or rank regions",
+     "operationId": "regions",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Name or ISO 3166-2",
+       "example": "Tokyo"
+      },
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2",
+       "example": "JP"
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "m6_density | m7 | m6 | warming | deaths | events | name",
+       "example": "m6_density"
+      },
+      {
+       "name": "joint_exposure",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "true = only the 41 joint-exposure regions",
+       "example": "false"
+      },
+      {
+       "name": "lat",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Latitude",
+       "example": null
+      },
+      {
+       "name": "lon",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Longitude",
+       "example": null
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/regions/{id}",
+     "summary": "Region profile (finished answer)",
+     "operationId": "regionProfile",
+     "params": [
+      {
+       "name": "id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "ISO 3166-2 code, a1 id, HASC or Wikidata id",
+       "example": "JP-13"
+      },
+      {
+       "name": "events",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Events per list (max 50)",
+       "example": 10
+      }
+     ]
+    },
+    {
+     "path": "/regions/{id}/events",
+     "summary": "Events in a region",
+     "operationId": "regionEvents",
+     "params": [
+      {
+       "name": "id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": "JP-13"
+      },
+      {
+       "name": "kind",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "sig_earthquake | tsunami | volcano",
+       "example": ""
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "newest | deaths",
+       "example": "deaths"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/regions/{id}/stations",
+     "summary": "Stations in a region",
+     "operationId": "regionStations",
+     "params": [
+      {
+       "name": "id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": "JP-13"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/stations",
+     "summary": "Weather stations",
+     "operationId": "stations",
+     "params": [
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2",
+       "example": "NO"
+      },
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Station name",
+       "example": ""
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "warmest | coolest",
+       "example": "warmest"
+      },
+      {
+       "name": "lat",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Latitude",
+       "example": null
+      },
+      {
+       "name": "lon",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Longitude",
+       "example": null
+      },
+      {
+       "name": "radius_km",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Radius (default 200)",
+       "example": 200
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/stations/{id}",
+     "summary": "Get a station",
+     "operationId": "station",
+     "params": [
+      {
+       "name": "id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": "JA000047662"
+      }
+     ]
+    },
+    {
+     "path": "/summary",
+     "summary": "Totals",
+     "operationId": "summary",
+     "params": []
+    },
+    {
+     "path": "/trends",
+     "summary": "Trends",
+     "operationId": "trends",
+     "params": [
+      {
+       "name": "band",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "all | arctic | non_arctic (empty = all bands)",
+       "example": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "japan",
+   "title": "Japan Municipality Statistics",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/indicators",
+     "summary": "List indicators",
+     "operationId": "indicators",
+     "params": []
+    },
+    {
+     "path": "/municipalities",
+     "summary": "List municipalities",
+     "operationId": "municipalities",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Name (Japanese)",
+       "example": "霧島"
+      },
+      {
+       "name": "prefecture",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Prefecture code",
+       "example": "46"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/municipalities/{code}",
+     "summary": "Municipality profile",
+     "operationId": "municipality",
+     "params": [
+      {
+       "name": "code",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      },
+      {
+       "name": "indicator",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Only this indicator",
+       "example": "A1101"
+      }
+     ]
+    },
+    {
+     "path": "/rank",
+     "summary": "Rank municipalities",
+     "operationId": "rank",
+     "params": [
+      {
+       "name": "indicator",
+       "in": "query",
+       "required": true,
+       "type": "string",
+       "description": "Indicator code",
+       "example": "A1101"
+      },
+      {
+       "name": "year",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Year (default latest)",
+       "example": 2020
+      },
+      {
+       "name": "prefecture",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Prefecture code",
+       "example": "13"
+      },
+      {
+       "name": "order",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "desc | asc",
+       "example": "desc"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "jp-health",
+   "title": "Japan Hospitals and Prefecture Health Facts",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/cities/{city_code}",
+     "summary": "Hospitals in a municipality",
+     "operationId": "city",
+     "params": [
+      {
+       "name": "city_code",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "5-digit JIS code",
+       "example": "13104"
+      }
+     ]
+    },
+    {
+     "path": "/facts",
+     "summary": "Prefecture facts",
+     "operationId": "facts",
+     "params": [
+      {
+       "name": "topic",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "See /facts/topics",
+       "example": "min_wage"
+      },
+      {
+       "name": "pref",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Prefecture: code 01-47, ISO 3166-2 (JP-13), English name (Tokyo) or Japanese name (東京都)",
+       "example": "Osaka"
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "value | value_asc | (default pref)",
+       "example": "value"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/facts/topics",
+     "summary": "Fact topics",
+     "operationId": "factTopics",
+     "params": []
+    },
+    {
+     "path": "/gaps",
+     "summary": "Gaps",
+     "operationId": "gaps",
+     "params": [
+      {
+       "name": "by",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "hospitals | beds | discharges | municipalities | large_hospitals | concentration",
+       "example": "hospitals"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/hospitals",
+     "summary": "Search hospitals",
+     "operationId": "hospitals",
+     "params": [
+      {
+       "name": "pref",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Prefecture: code 01-47, ISO 3166-2 (JP-13), English name (Tokyo) or Japanese name (東京都)",
+       "example": "Osaka"
+      },
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Text in the Japanese name",
+       "example": "大学"
+      },
+      {
+       "name": "city_code",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "5-digit JIS municipality code",
+       "example": "27128"
+      },
+      {
+       "name": "dpc_status",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "dpc_participating | dpc_preparing | fee_for_service",
+       "example": "dpc_participating"
+      },
+      {
+       "name": "min_beds",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Minimum beds",
+       "example": 300
+      },
+      {
+       "name": "max_beds",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Maximum beds",
+       "example": null
+      },
+      {
+       "name": "mdc",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Diagnostic category M01-M18",
+       "example": "M05"
+      },
+      {
+       "name": "min_cases",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Minimum discharges in that category",
+       "example": 500
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "discharges | beds | name | smallest | id (with mdc: discharges | surgical | beds)",
+       "example": "discharges"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/hospitals/{hospital_id}",
+     "summary": "Get a hospital",
+     "operationId": "hospital",
+     "params": [
+      {
+       "name": "hospital_id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "Hospital id",
+       "example": "10046"
+      }
+     ]
+    },
+    {
+     "path": "/hospitals/{hospital_id}/mdc",
+     "summary": "Hospital case mix",
+     "operationId": "hospitalMdc",
+     "params": [
+      {
+       "name": "hospital_id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "Hospital id",
+       "example": "10024"
+      }
+     ]
+    },
+    {
+     "path": "/hospitals/{hospital_id}/profile",
+     "summary": "Hospital profile",
+     "operationId": "hospitalProfile",
+     "params": [
+      {
+       "name": "hospital_id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "Hospital id",
+       "example": "10046"
+      }
+     ]
+    },
+    {
+     "path": "/mdc",
+     "summary": "Diagnostic categories",
+     "operationId": "mdcList",
+     "params": []
+    },
+    {
+     "path": "/mdc/{mdc}",
+     "summary": "Top hospitals per category",
+     "operationId": "mdcTop",
+     "params": [
+      {
+       "name": "mdc",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "M01-M18",
+       "example": "M05"
+      },
+      {
+       "name": "pref",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Prefecture: code 01-47, ISO 3166-2 (JP-13), English name (Tokyo) or Japanese name (東京都)",
+       "example": "Osaka"
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "discharges | surgical | share",
+       "example": "discharges"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/prefectures",
+     "summary": "Prefectures",
+     "operationId": "prefectures",
+     "params": [
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "hospitals | beds | discharges | concentration | real_min_wage | price_index | ...",
+       "example": "beds"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/prefectures/{pref}",
+     "summary": "Get a prefecture",
+     "operationId": "prefecture",
+     "params": [
+      {
+       "name": "pref",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "01-47, JP-13, Tokyo or 東京都",
+       "example": "JP-27"
+      }
+     ]
+    },
+    {
+     "path": "/prefectures/{pref}/facts",
+     "summary": "Prefecture facts",
+     "operationId": "prefFacts",
+     "params": [
+      {
+       "name": "pref",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "Prefecture",
+       "example": "13"
+      }
+     ]
+    },
+    {
+     "path": "/prefectures/{pref}/health-profile",
+     "summary": "Prefecture health profile",
+     "operationId": "healthProfile",
+     "params": [
+      {
+       "name": "pref",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "01-47, JP-13, Tokyo or 東京都",
+       "example": "JP-13"
+      }
+     ]
+    },
+    {
+     "path": "/prefectures/{pref}/hospitals",
+     "summary": "Hospitals in a prefecture",
+     "operationId": "prefHospitals",
+     "params": [
+      {
+       "name": "pref",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "Prefecture",
+       "example": "Hokkaido"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/rank",
+     "summary": "Rank prefectures",
+     "operationId": "rank",
+     "params": [
+      {
+       "name": "by",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "hospitals | beds | discharges | municipalities | hospitals_500_beds_plus | top100 | concentration | discharges_per_hospital | beds_per_hospital | foreign_residents | job_ratio | min_wage | real_min_wa",
+       "example": "real_min_wage"
+      },
+      {
+       "name": "order",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "desc | asc",
+       "example": "desc"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/summary",
+     "summary": "Dataset summary",
+     "operationId": "summary",
+     "params": []
+    }
+   ]
+  },
+  {
+   "id": "kinds",
+   "title": "Kinds: linked ledgers of kinds of things (instruments, woods, alloys, elements)",
+   "price_atomic": "50000",
+   "price_usd": 0.05,
+   "free_routes": [],
+   "has_local_spec": false,
+   "routes": [
+    {
+     "path": "/chain",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/facets",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/search",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/{id}",
+     "summary": "",
+     "operationId": null,
+     "params": [
+      {
+       "name": "id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "koyomi",
+   "title": "Koyomi: Calendars, Holidays and Helplines for AI Answers",
+   "price_atomic": "50000",
+   "price_usd": 0.05,
+   "free_routes": [
+    "/helplines"
+   ],
+   "has_local_spec": false,
+   "routes": [
+    {
+     "path": "/countries",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/day",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/helplines",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/holidays",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/moon-phases",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/range",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/rules",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/solar-terms",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/sun",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/topics",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    }
+   ]
+  },
+  {
+   "id": "languages",
+   "title": "World Languages (Glottolog)",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/search",
+     "summary": "Search languages",
+     "operationId": "searchLanguages",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Name or autonym",
+       "example": "Ainu"
+      },
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2",
+       "example": "JP"
+      },
+      {
+       "name": "family",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Family glottocode or name",
+       "example": "Japonic"
+      },
+      {
+       "name": "endangerment",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Status",
+       "example": "threatened"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/{code}",
+     "summary": "Get a language",
+     "operationId": "language",
+     "params": [
+      {
+       "name": "code",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "licenses",
+   "title": "Open Source Licenses (SPDX)",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/search",
+     "summary": "Search licenses",
+     "operationId": "searchLicenses",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Id or name",
+       "example": "apache"
+      },
+      {
+       "name": "osi_approved",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "true | false",
+       "example": "true"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/{id}",
+     "summary": "Get a license",
+     "operationId": "license",
+     "params": [
+      {
+       "name": "id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "local-markets",
+   "title": "Local Markets: markets away from big cities",
+   "price_atomic": "50000",
+   "price_usd": 0.05,
+   "free_routes": [],
+   "has_local_spec": false,
+   "routes": [
+    {
+     "path": "/countries",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/country",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/near",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/search",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/{id}",
+     "summary": "",
+     "operationId": null,
+     "params": [
+      {
+       "name": "id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "markets",
+   "title": "World Markets: Farmers, Flea, Night and Fish Markets",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/countries",
+     "summary": "Markets by country",
+     "operationId": "countries",
+     "params": [
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2 (empty = all)",
+       "example": "TH"
+      },
+      {
+       "name": "kind",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Market kind",
+       "example": ""
+      },
+      {
+       "name": "min_population",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Only countries above this population",
+       "example": 10000000
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "population | per_million (lowest first)",
+       "example": "per_million"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/kinds",
+     "summary": "Market kinds",
+     "operationId": "kinds",
+     "params": []
+    },
+    {
+     "path": "/nearby",
+     "summary": "Nearby markets",
+     "operationId": "nearbyMarkets",
+     "params": [
+      {
+       "name": "lat",
+       "in": "query",
+       "required": true,
+       "type": "number",
+       "description": "Latitude",
+       "example": 35.68
+      },
+      {
+       "name": "lon",
+       "in": "query",
+       "required": true,
+       "type": "number",
+       "description": "Longitude",
+       "example": 139.76
+      },
+      {
+       "name": "kind",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Market kind (see /kinds)",
+       "example": "farmers_market"
+      },
+      {
+       "name": "include_closed",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "true to include permanently closed",
+       "example": "false"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "How many (max 50)",
+       "example": 10
+      }
+     ]
+    },
+    {
+     "path": "/search",
+     "summary": "Search markets",
+     "operationId": "searchMarkets",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Name or town",
+       "example": "Borough"
+      },
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2",
+       "example": "GB"
+      },
+      {
+       "name": "kind",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Market kind",
+       "example": "flea_market"
+      },
+      {
+       "name": "include_closed",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "true | false",
+       "example": "false"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/{id}",
+     "summary": "Get a market",
+     "operationId": "market",
+     "params": [
+      {
+       "name": "id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "orgs",
+   "title": "World Organizations: Research Bodies Societies Funders and Publishers",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/countries",
+     "summary": "Organizations by country",
+     "operationId": "orgCountries",
+     "params": [
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2 (empty = all)",
+       "example": "JP"
+      },
+      {
+       "name": "kind",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Kind",
+       "example": ""
+      },
+      {
+       "name": "form",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Form",
+       "example": ""
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "population | per_million",
+       "example": "population"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/forms",
+     "summary": "Forms",
+     "operationId": "forms",
+     "params": []
+    },
+    {
+     "path": "/gaps",
+     "summary": "Thinly recorded countries",
+     "operationId": "gaps",
+     "params": [
+      {
+       "name": "kind",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Kind",
+       "example": ""
+      },
+      {
+       "name": "form",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Form",
+       "example": ""
+      },
+      {
+       "name": "min_population",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Only countries above this population",
+       "example": 1000000
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/kinds",
+     "summary": "Kinds",
+     "operationId": "kinds",
+     "params": []
+    },
+    {
+     "path": "/nearby",
+     "summary": "Nearby organizations",
+     "operationId": "nearbyOrgs",
+     "params": [
+      {
+       "name": "lat",
+       "in": "query",
+       "required": true,
+       "type": "number",
+       "description": "Latitude",
+       "example": -1.29
+      },
+      {
+       "name": "lon",
+       "in": "query",
+       "required": true,
+       "type": "number",
+       "description": "Longitude",
+       "example": 36.82
+      },
+      {
+       "name": "kind",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Kind",
+       "example": ""
+      },
+      {
+       "name": "form",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Form",
+       "example": ""
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "How many (max 50)",
+       "example": 10
+      }
+     ]
+    },
+    {
+     "path": "/nonprofits/causes",
+     "summary": "US nonprofits by cause",
+     "operationId": "nonprofitCauses",
+     "params": [
+      {
+       "name": "state",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "US state code",
+       "example": ""
+      }
+     ]
+    },
+    {
+     "path": "/nonprofits/search",
+     "summary": "Search US nonprofits",
+     "operationId": "searchNonprofits",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Name text",
+       "example": "food bank"
+      },
+      {
+       "name": "state",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "US state code",
+       "example": "MT"
+      },
+      {
+       "name": "city",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Town (exact, case-insensitive)",
+       "example": ""
+      },
+      {
+       "name": "postcode",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "5-digit ZIP",
+       "example": ""
+      },
+      {
+       "name": "kind",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "charity | private_foundation | other_exempt_org",
+       "example": ""
+      },
+      {
+       "name": "cause",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "NTEE major letter, e.g. K = food and agriculture",
+       "example": "K"
+      },
+      {
+       "name": "min_revenue",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Minimum revenue (USD)",
+       "example": null
+      },
+      {
+       "name": "max_revenue",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Maximum revenue (USD)",
+       "example": null
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "revenue | smallest | name | oldest",
+       "example": "revenue"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/nonprofits/states",
+     "summary": "US nonprofits by state",
+     "operationId": "nonprofitStates",
+     "params": [
+      {
+       "name": "cause",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "NTEE major letter",
+       "example": ""
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "most | fewest",
+       "example": "most"
+      }
+     ]
+    },
+    {
+     "path": "/nonprofits/{ein}",
+     "summary": "Get a US nonprofit",
+     "operationId": "nonprofit",
+     "params": [
+      {
+       "name": "ein",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    },
+    {
+     "path": "/search",
+     "summary": "Search organizations",
+     "operationId": "searchOrgs",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Name or acronym",
+       "example": "society"
+      },
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2",
+       "example": "KE"
+      },
+      {
+       "name": "kind",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "education | nonprofit | healthcare | facility | government | archive | company | other | funder | publisher",
+       "example": ""
+      },
+      {
+       "name": "form",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "society | association | academy | foundation | ...",
+       "example": ""
+      },
+      {
+       "name": "source",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "institutions | funders | publishers",
+       "example": ""
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "works | name",
+       "example": "works"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/{id}",
+     "summary": "Get an organization",
+     "operationId": "org",
+     "params": [
+      {
+       "name": "id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pet-entry",
+   "title": "Pet entry: can my dog or cat cross this border in time?",
+   "price_atomic": "500000",
+   "price_usd": 0.5,
+   "free_routes": [
+    "/countries"
+   ],
+   "has_local_spec": false,
+   "routes": [
+    {
+     "path": "/answer",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/countries",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/country",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    }
+   ]
+  },
+  {
+   "id": "platforms",
+   "title": "Online Platforms Directory",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/categories",
+     "summary": "List categories",
+     "operationId": "categories",
+     "params": []
+    },
+    {
+     "path": "/search",
+     "summary": "Search platforms",
+     "operationId": "searchPlatforms",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Name or domain",
+       "example": "uber"
+      },
+      {
+       "name": "category",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Category",
+       "example": "food_delivery"
+      },
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2",
+       "example": "JP"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/{wikidata}",
+     "summary": "Get a platform",
+     "operationId": "platform",
+     "params": [
+      {
+       "name": "wikidata",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "power",
+   "title": "Power Plants of the World",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/countries",
+     "summary": "Country fuel mix",
+     "operationId": "fuelMix",
+     "params": [
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-3 (empty = all)",
+       "example": "JPN"
+      }
+     ]
+    },
+    {
+     "path": "/fuels",
+     "summary": "Fuels",
+     "operationId": "fuels",
+     "params": []
+    },
+    {
+     "path": "/nearby",
+     "summary": "Nearby power plants",
+     "operationId": "nearbyPlants",
+     "params": [
+      {
+       "name": "lat",
+       "in": "query",
+       "required": true,
+       "type": "number",
+       "description": "Latitude",
+       "example": 35.68
+      },
+      {
+       "name": "lon",
+       "in": "query",
+       "required": true,
+       "type": "number",
+       "description": "Longitude",
+       "example": 139.76
+      },
+      {
+       "name": "fuel",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Primary fuel",
+       "example": "Solar"
+      },
+      {
+       "name": "min_mw",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Minimum capacity MW",
+       "example": 0
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "How many (max 50)",
+       "example": 5
+      }
+     ]
+    },
+    {
+     "path": "/search",
+     "summary": "Search plants",
+     "operationId": "searchPlants",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Name or owner",
+       "example": "Kashiwazaki"
+      },
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-3",
+       "example": "JPN"
+      },
+      {
+       "name": "fuel",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Primary fuel",
+       "example": "Nuclear"
+      },
+      {
+       "name": "min_mw",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Minimum capacity MW",
+       "example": 100
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/{id}",
+     "summary": "Get a plant",
+     "operationId": "plant",
+     "params": [
+      {
+       "name": "id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pulse",
+   "title": "World Pulse Daily Tech and Money Briefing",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/briefing",
+     "summary": "Daily briefing",
+     "operationId": "briefing",
+     "params": [
+      {
+       "name": "date",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "YYYY-MM-DD, default latest loaded day",
+       "example": "2026-11-03"
+      }
+     ]
+    },
+    {
+     "path": "/changes",
+     "summary": "Changes since a day",
+     "operationId": "changes",
+     "params": [
+      {
+       "name": "since",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "YYYY-MM-DD, default the day before the latest",
+       "example": "2026-11-02"
+      },
+      {
+       "name": "date",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Compare up to this day (default latest)",
+       "example": ""
+      },
+      {
+       "name": "feed",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Only one feed (ai_sdk_downloads | arxiv | crates_io | crossref | fx_ecb | github_new_repos | hf_daily_papers | stablecoins | stackoverflow_tags | summary | wikipedia_size | wikipedia_top | zenodo)",
+       "example": ""
+      },
+      {
+       "name": "kind",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Only one kind within a feed (e.g. en, coin, language, npm)",
+       "example": ""
+      },
+      {
+       "name": "type",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "all | new | moved",
+       "example": "all"
+      },
+      {
+       "name": "min_change_pct",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Only moves of at least this many percent",
+       "example": null
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/days",
+     "summary": "Days loaded",
+     "operationId": "days",
+     "params": [
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Days (max 400)",
+       "example": 30
+      }
+     ]
+    },
+    {
+     "path": "/feeds",
+     "summary": "List feeds",
+     "operationId": "feeds",
+     "params": []
+    },
+    {
+     "path": "/feeds/{feed}",
+     "summary": "One feed on one day",
+     "operationId": "feed",
+     "params": [
+      {
+       "name": "feed",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "ai_sdk_downloads | arxiv | crates_io | crossref | fx_ecb | github_new_repos | hf_daily_papers | stablecoins | stackoverflow_tags | summary | wikipedia_size | wikipedia_top | zenodo",
+       "example": "github_new_repos"
+      },
+      {
+       "name": "date",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "YYYY-MM-DD, default latest",
+       "example": ""
+      },
+      {
+       "name": "kind",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Kind within the feed (e.g. en, coin, chain, npm, pypi, ai, top100, type-name)",
+       "example": ""
+      },
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Text in name or key",
+       "example": ""
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "value | change | change_pct | rank | name",
+       "example": "value"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/feeds/{feed}/history",
+     "summary": "History of one item",
+     "operationId": "history",
+     "params": [
+      {
+       "name": "feed",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "ai_sdk_downloads | arxiv | crates_io | crossref | fx_ecb | github_new_repos | hf_daily_papers | stablecoins | stackoverflow_tags | summary | wikipedia_size | wikipedia_top | zenodo",
+       "example": "ai_sdk_downloads"
+      },
+      {
+       "name": "key",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Exact key from /feeds/{feed}",
+       "example": "npm:@anthropic-ai/sdk"
+      },
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Or text in the name",
+       "example": ""
+      },
+      {
+       "name": "kind",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Kind",
+       "example": ""
+      },
+      {
+       "name": "from",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "First day",
+       "example": ""
+      },
+      {
+       "name": "to",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Last day",
+       "example": ""
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/fx",
+     "summary": "Exchange rates",
+     "operationId": "fx",
+     "params": [
+      {
+       "name": "base",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Base currency (default EUR)",
+       "example": "USD"
+      },
+      {
+       "name": "to",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Target currency",
+       "example": "JPY"
+      },
+      {
+       "name": "amount",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Amount to convert (with to)",
+       "example": 100
+      },
+      {
+       "name": "date",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "YYYY-MM-DD, default latest",
+       "example": ""
+      }
+     ]
+    },
+    {
+     "path": "/search",
+     "summary": "Search all feeds",
+     "operationId": "search",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": true,
+       "type": "string",
+       "description": "Text (2+ characters)",
+       "example": "claude"
+      },
+      {
+       "name": "feed",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Only one feed",
+       "example": ""
+      },
+      {
+       "name": "from",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "First day",
+       "example": ""
+      },
+      {
+       "name": "to",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Last day",
+       "example": ""
+      },
+      {
+       "name": "history",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "true = every day's row instead of one row per item",
+       "example": "false"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/today",
+     "summary": "Today across feeds",
+     "operationId": "today",
+     "params": [
+      {
+       "name": "date",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "YYYY-MM-DD, default latest",
+       "example": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "regions",
+   "title": "States and Provinces of the World + Land Stats",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/search",
+     "summary": "Search regions",
+     "operationId": "searchRegions",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Name in any language",
+       "example": "Kagoshima"
+      },
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2",
+       "example": "JP"
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "area | forest_loss | built | population_growth",
+       "example": "area"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/{iso3166_2}",
+     "summary": "Get a region",
+     "operationId": "region",
+     "params": [
+      {
+       "name": "iso3166_2",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "rising",
+   "title": "What Is Rising in the World Today",
+   "price_atomic": "50000",
+   "price_usd": 0.05,
+   "free_routes": [],
+   "has_local_spec": false,
+   "routes": [
+    {
+     "path": "/days",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/history",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/today",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/{date}",
+     "summary": "",
+     "operationId": null,
+     "params": [
+      {
+       "name": "date",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "science",
+   "title": "World Science Output by Country and Field",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/countries/{iso2}",
+     "summary": "Country history",
+     "operationId": "country",
+     "params": [
+      {
+       "name": "iso2",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": "JP"
+      },
+      {
+       "name": "from",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "First year",
+       "example": 2000
+      },
+      {
+       "name": "to",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Last year",
+       "example": 2025
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/fields",
+     "summary": "Fields in a year",
+     "operationId": "fields",
+     "params": [
+      {
+       "name": "year",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Year",
+       "example": 2025
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/fields/{field_id}",
+     "summary": "Field history",
+     "operationId": "field",
+     "params": [
+      {
+       "name": "field_id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": "27"
+      },
+      {
+       "name": "from",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "First year",
+       "example": 2000
+      },
+      {
+       "name": "to",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Last year",
+       "example": 2025
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/gaps",
+     "summary": "Gaps",
+     "operationId": "gaps",
+     "params": [
+      {
+       "name": "year",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Year",
+       "example": 2025
+      },
+      {
+       "name": "min_population",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Minimum population",
+       "example": 1000000
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/rank",
+     "summary": "Rank countries",
+     "operationId": "rank",
+     "params": [
+      {
+       "name": "year",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Year",
+       "example": 2025
+      },
+      {
+       "name": "by",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "papers | per_million | open_access_share | citations",
+       "example": "per_million"
+      },
+      {
+       "name": "min_population",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Minimum population",
+       "example": 1000000
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/rising",
+     "summary": "Rising subfields",
+     "operationId": "rising",
+     "params": [
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "ISO 3166-1 alpha-2",
+       "example": "JP"
+      },
+      {
+       "name": "subfield",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Subfield id",
+       "example": null
+      },
+      {
+       "name": "field",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Field name text",
+       "example": ""
+      },
+      {
+       "name": "min_papers",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Minimum papers in 2025",
+       "example": 50
+      },
+      {
+       "name": "sort",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "index | papers",
+       "example": "index"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/subfields",
+     "summary": "Subfields",
+     "operationId": "subfields",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Text",
+       "example": "informatics"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "security",
+   "title": "Security ledgers: exploited CVEs (CISA KEV + EPSS + NVD), breach disclosures, change feed",
+   "price_atomic": "10000",
+   "price_usd": 0.01,
+   "free_routes": [
+    "/stats",
+    "/gaps"
+   ],
+   "has_local_spec": false,
+   "routes": [
+    {
+     "path": "/breaches",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/changes",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/cve/{id}",
+     "summary": "",
+     "operationId": null,
+     "params": [
+      {
+       "name": "id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    },
+    {
+     "path": "/gaps",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/hot",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/incidents",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/incidents/trends",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/kev",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/stats",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/vendors",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    }
+   ]
+  },
+  {
+   "id": "sound",
+   "title": "World Music Instruments and Singing Styles",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/classes",
+     "summary": "Hornbostel-Sachs classes",
+     "operationId": "classes",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Text or code",
+       "example": "lute"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/classes/{hs_code}",
+     "summary": "Get a class",
+     "operationId": "class",
+     "params": [
+      {
+       "name": "hs_code",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": "321"
+      }
+     ]
+    },
+    {
+     "path": "/ensembles",
+     "summary": "Ensembles",
+     "operationId": "ensembles",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Instrument text",
+       "example": "drum"
+      },
+      {
+       "name": "region",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Region",
+       "example": ""
+      },
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Country",
+       "example": ""
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/functions",
+     "summary": "Song functions",
+     "operationId": "functions",
+     "params": [
+      {
+       "name": "function",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "e.g. Dance, Lullaby, Healing",
+       "example": ""
+      },
+      {
+       "name": "region",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Region",
+       "example": ""
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/genres",
+     "summary": "Genres",
+     "operationId": "genres",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Text",
+       "example": ""
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/instruments",
+     "summary": "Instruments",
+     "operationId": "instruments",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Name or local name",
+       "example": "drum"
+      },
+      {
+       "name": "hs_class",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "idiophone | membranophone | chordophone | aerophone",
+       "example": "chordophone"
+      },
+      {
+       "name": "hs_number",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Hornbostel-Sachs prefix",
+       "example": "321"
+      },
+      {
+       "name": "region",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Region text",
+       "example": ""
+      },
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Country text",
+       "example": ""
+      },
+      {
+       "name": "society_id",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Society id",
+       "example": ""
+      },
+      {
+       "name": "lat",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Latitude",
+       "example": null
+      },
+      {
+       "name": "lon",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Longitude",
+       "example": null
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/instruments/{id}",
+     "summary": "Get an instrument",
+     "operationId": "instrument",
+     "params": [
+      {
+       "name": "id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": "GJI-1"
+      }
+     ]
+    },
+    {
+     "path": "/names",
+     "summary": "Instrument names in 12 languages",
+     "operationId": "names",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Name in any of the languages",
+       "example": "violin"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/societies",
+     "summary": "Societies",
+     "operationId": "societies",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Society name",
+       "example": "Ainu"
+      },
+      {
+       "name": "region",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Region text",
+       "example": "Africa"
+      },
+      {
+       "name": "country",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Country text",
+       "example": "Japan"
+      },
+      {
+       "name": "lat",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Latitude",
+       "example": null
+      },
+      {
+       "name": "lon",
+       "in": "query",
+       "required": false,
+       "type": "number",
+       "description": "Longitude",
+       "example": null
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/societies/{society_id}",
+     "summary": "Society profile",
+     "operationId": "society",
+     "params": [
+      {
+       "name": "society_id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    },
+    {
+     "path": "/songs",
+     "summary": "Songs",
+     "operationId": "songs",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Song or society",
+       "example": "lullaby"
+      },
+      {
+       "name": "genre",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Genre text",
+       "example": "Dance"
+      },
+      {
+       "name": "sound_source",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Voice or instrument text",
+       "example": "Drum"
+      },
+      {
+       "name": "region",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Region",
+       "example": ""
+      },
+      {
+       "name": "society_id",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Society id",
+       "example": ""
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/sound-sources",
+     "summary": "Sound sources",
+     "operationId": "soundSources",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Text",
+       "example": ""
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/styles",
+     "summary": "Singing style values",
+     "operationId": "styles",
+     "params": [
+      {
+       "name": "society_id",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Society id",
+       "example": ""
+      },
+      {
+       "name": "var_id",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Axis id",
+       "example": "line_1"
+      },
+      {
+       "name": "code",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Code",
+       "example": ""
+      },
+      {
+       "name": "region",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Region",
+       "example": ""
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/styles/axes",
+     "summary": "Singing style axes",
+     "operationId": "styleAxes",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Text",
+       "example": "rhythm"
+      },
+      {
+       "name": "var_id",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "e.g. line_1",
+       "example": ""
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "travel-meds",
+   "title": "Travel meds: can I bring this medicine into this country?",
+   "price_atomic": "500000",
+   "price_usd": 0.5,
+   "free_routes": [],
+   "has_local_spec": false,
+   "routes": [
+    {
+     "path": "/answer",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/countries",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    },
+    {
+     "path": "/country",
+     "summary": "",
+     "operationId": null,
+     "params": []
+    }
+   ]
+  },
+  {
+   "id": "units",
+   "title": "Unit Converter and Physical Constants",
+   "price_atomic": "5000",
+   "price_usd": 0.005,
+   "free_routes": [],
+   "has_local_spec": true,
+   "routes": [
+    {
+     "path": "/constants",
+     "summary": "Search physical constants",
+     "operationId": "constants",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Text to search",
+       "example": "planck"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/constants/{id}",
+     "summary": "Get a constant",
+     "operationId": "constant",
+     "params": [
+      {
+       "name": "id",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    },
+    {
+     "path": "/convert",
+     "summary": "Convert a value",
+     "operationId": "convert",
+     "params": [
+      {
+       "name": "value",
+       "in": "query",
+       "required": true,
+       "type": "number",
+       "description": "Number to convert",
+       "example": 100
+      },
+      {
+       "name": "from",
+       "in": "query",
+       "required": true,
+       "type": "string",
+       "description": "Source unit (id, symbol, UCUM or name)",
+       "example": "degF"
+      },
+      {
+       "name": "to",
+       "in": "query",
+       "required": true,
+       "type": "string",
+       "description": "Target unit",
+       "example": "degC"
+      }
+     ]
+    },
+    {
+     "path": "/isotopes",
+     "summary": "List isotopes",
+     "operationId": "isotopes",
+     "params": [
+      {
+       "name": "element",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Element symbol",
+       "example": "c"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/quantity-kinds",
+     "summary": "List quantity kinds",
+     "operationId": "quantityKinds",
+     "params": []
+    },
+    {
+     "path": "/search",
+     "summary": "Search units",
+     "operationId": "searchUnits",
+     "params": [
+      {
+       "name": "q",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "Text to search",
+       "example": "mile"
+      },
+      {
+       "name": "quantity_kind",
+       "in": "query",
+       "required": false,
+       "type": "string",
+       "description": "e.g. length, mass, pressure",
+       "example": "length"
+      },
+      {
+       "name": "limit",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Max rows (1-200, default 50)",
+       "example": 20
+      },
+      {
+       "name": "offset",
+       "in": "query",
+       "required": false,
+       "type": "integer",
+       "description": "Rows to skip",
+       "example": 0
+      }
+     ]
+    },
+    {
+     "path": "/{unit}",
+     "summary": "Get a unit",
+     "operationId": "unit",
+     "params": [
+      {
+       "name": "unit",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "",
+       "example": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

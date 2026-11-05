@@ -1,0 +1,70 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Veniwol-Li-Lambd/lilambd-mcp",
+  "title": "Lilambd Data for Agents",
+  "description": "170 data tools for agents: airports, hazards, markets, CVEs, Japan stats. x402 USDC or free samples.",
+  "version": "0.1.0",
+  "websiteUrl": "https://api.lilambd.com",
+  "repository": {
+    "url": "https://github.com/Veniwol-Li-Lambd/lilambd-sdk",
+    "source": "github",
+    "subfolder": "mcp"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "lilambd-mcp",
+      "version": "0.1.0",
+      "runtimeHint": "npx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "LILAMBD_TOOLSET",
+          "description": "Comma-separated product ids to expose (default: all 27 products, 172 tools)",
+          "isRequired": false,
+          "format": "string"
+        },
+        {
+          "name": "LILAMBD_DEFAULT_SAMPLE",
+          "description": "Set to 1 to default every call to the free 3-row preview",
+          "isRequired": false,
+          "format": "string"
+        },
+        {
+          "name": "LILAMBD_PAYMENT_SIGNATURE_CMD",
+          "description": "Shell command that reads x402 payment requirements JSON on stdin and prints a PAYMENT-SIGNATURE header value",
+          "isRequired": false,
+          "format": "string"
+        },
+        {
+          "name": "LILAMBD_BASE_URL",
+          "description": "Upstream API base URL (default https://api.lilambd.com)",
+          "isRequired": false,
+          "format": "string"
+        },
+        {
+          "name": "LILAMBD_RAPIDAPI_KEY",
+          "description": "RapidAPI key (alternative to x402 payments)",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "LILAMBD_RAPIDAPI_HOST",
+          "description": "RapidAPI host for the key above",
+          "isRequired": false,
+          "format": "string"
+        }
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.lilambd.com/mcp"
+    }
+  ]
+}

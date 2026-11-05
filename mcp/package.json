@@ -1,0 +1,57 @@
+{
+  "name": "lilambd-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for Lilambd Data for Agents: 170 pay-per-call data endpoints (airports, hazards, markets, CVEs, Japan stats and more) as MCP tools, with x402 USDC payments and free sample previews.",
+  "mcpName": "io.github.Veniwol-Li-Lambd/lilambd-mcp",
+  "type": "module",
+  "main": "dist/server.js",
+  "types": "dist/server.d.ts",
+  "bin": {
+    "lilambd-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "catalog.json",
+    "server.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc && chmod +x dist/index.js",
+    "sync-catalog": "cp ../spec/catalog.json catalog.json",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "gen-readme": "node scripts/gen-readme.mjs",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "x402",
+    "lilambd",
+    "data",
+    "agents",
+    "claude"
+  ],
+  "author": "Lilambd Crossing <hello@lilambd.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/Veniwol-Li-Lambd/lilambd-sdk/tree/main/mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Veniwol-Li-Lambd/lilambd-sdk.git",
+    "directory": "mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/Veniwol-Li-Lambd/lilambd-sdk/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3"
+  }
+}

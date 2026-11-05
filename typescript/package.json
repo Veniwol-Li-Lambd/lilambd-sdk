@@ -1,0 +1,66 @@
+{
+  "name": "lilambd",
+  "version": "0.1.0",
+  "description": "Zero-dependency TypeScript client for the Lilambd open-data API (27 datasets, pay-per-call over x402 or via RapidAPI).",
+  "license": "MIT",
+  "author": "Lilambd Crossing <hello@lilambd.com>",
+  "homepage": "https://api.lilambd.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Veniwol-Li-Lambd/lilambd-sdk.git",
+    "directory": "typescript"
+  },
+  "bugs": {
+    "url": "https://github.com/Veniwol-Li-Lambd/lilambd-sdk/issues"
+  },
+  "keywords": [
+    "x402",
+    "mcp",
+    "open-data",
+    "api",
+    "sdk",
+    "usdc",
+    "base",
+    "agents",
+    "rapidapi"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "generate": "node scripts/generate.mjs",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "prepublishOnly": "npm run generate && npm run typecheck && npm run build && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}

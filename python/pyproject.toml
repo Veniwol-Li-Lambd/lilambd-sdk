@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lilambd"
+version = "0.1.0"
+description = "Python client for the Lilambd data API: 27 datasets, pay-per-call with x402 (USDC on Base) or via RapidAPI."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Lilambd Crossing", email = "hello@lilambd.com" }]
+keywords = ["x402", "api", "sdk", "data", "usdc", "base", "agents", "rapidapi", "pay-per-call"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "build"]
+
+[project.urls]
+Homepage = "https://api.lilambd.com"
+Documentation = "https://api.lilambd.com/llms.txt"
+Repository = "https://github.com/Veniwol-Li-Lambd/lilambd-sdk"
+Issues = "https://github.com/Veniwol-Li-Lambd/lilambd-sdk/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["lilambd"]
+
+[tool.hatch.build.targets.sdist]
+include = ["lilambd", "scripts", "tests", "examples", "README.md", "LICENSE", "pyproject.toml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
